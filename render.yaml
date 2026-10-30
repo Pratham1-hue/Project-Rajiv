@@ -1,17 +1,18 @@
 services:
   - type: web
-    name: tech-netra-api
-    runtime: python
+    name: tech-netra-backend
+    env: python
     plan: free
-    rootDir: backend
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /health
+    workingDirectory: ./backend
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.7
-      # Optional. "*" works for a first deploy; set your Vercel URL to lock it down.
+      - key: ANTHROPIC_API_KEY
+        scope: run
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-haiku-5-5
       - key: ALLOWED_ORIGINS
-        value: "*"
-      # Add ANTHROPIC_API_KEY in the Render dashboard after the service is created.
-      # Optionally add ANTHROPIC_MODEL to override claude-sonnet-5-5.
+        value: https://tech-netra.vercel.app,https://*.vercel.app
+      - key: ALLOWED_ORIGIN_REGEX
+        value: https://.*\.vercel\.app
