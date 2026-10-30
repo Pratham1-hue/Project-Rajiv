@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --focus-ring: #facc15;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: Consolas, "Cascadia Mono", "Courier New", monospace;
+}
+
+@layer base {
+  html {
+    /* Root size is driven by the user's text-size preference (see lib/preferences.ts) */
+    font-size: calc(100% * var(--tech-netra-text-scale, 1.125));
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+  }
+
+  /* One consistent, highly visible keyboard focus indicator across the app */
+  :focus-visible {
+    outline: 4px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  [role="dialog"] :focus-visible {
+    outline-color: #ffffff;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--focus-ring);
+  color: #000;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+@keyframes tn-splash-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tn-logo-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 6px rgb(47 139 255 / 0.55));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgb(95 243 255 / 0.75));
+  }
+}
+
+.tn-splash-in {
+  animation: tn-splash-in 600ms ease-out both;
+}
+
+.tn-logo-glow {
+  animation: tn-logo-glow 2.4s ease-in-out infinite;
+}
+
+/* ============================================================
+   HIGH-OPACITY DARK GLASSMORPHISM UTILITIES (90-95% OPACITY)
+   Maintains crisp text contrast (>7:1 WCAG AAA) with zero distortion
+   while providing subtle glassy edges and neon glow borders.
+   ============================================================ */
+
+.glass-panel {
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-deep {
+  background: rgba(10, 15, 29, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(51, 65, 85, 0.6);
+  box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-header {
+  background: rgba(8, 12, 22, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 2px solid rgba(250, 204, 21, 0.85);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.85);
+}
+
+.glass-active-line {
+  background: rgba(250, 204, 21, 0.12);
+  border-left: 4px solid #facc15;
+  box-shadow: inset 0 0 16px rgba(250, 204, 21, 0.06);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px -2px rgba(34, 211, 238, 0.25);
+}
+
+.glow-yellow {
+  box-shadow: 0 0 20px -2px rgba(250, 204, 21, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText;
+  }
+}
