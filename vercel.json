@@ -1,6 +1,5 @@
 {
-  "version": 2,
-  "buildCommand": "bash build.sh",
-  "installCommand": "cd frontend && npm ci",
+  "buildCommand": "npm --prefix=frontend run build",
+  "installCommand": "npm --prefix=frontend ci",
   "outputDirectory": "frontend/.next"
 }
