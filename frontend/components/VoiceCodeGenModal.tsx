@@ -57,7 +57,7 @@ export const VoiceCodeGenModal: React.FC<VoiceCodeGenModalProps> = ({
 
     recognition.onstart = () => {
       setIsListening(true);
-      audioCue.playStartChime?.();
+      audioCue.playSuccessChime?.();
       speakText("Listening for your prompt...");
     };
 
