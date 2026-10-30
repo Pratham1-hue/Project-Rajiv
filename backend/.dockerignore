@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+tech_netra.db
+workspace/
+.env
+.env.*
+test_api.py
